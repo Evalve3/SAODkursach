@@ -31,5 +31,9 @@ class HashTableABC(metaclass=ABCMeta):
         pass
 
     @abstractmethod
-    def find(self, key: str) -> int:
+    def find(self, key: str) -> Any:
+        pass
+
+    @abstractmethod
+    def get_all(self) -> list[Elem]:
         pass

@@ -1,7 +1,7 @@
 import random
 from typing import Any
 
-from src.core.repo.hash_table.hash_table_repo import HashTableABC
+from src.core.repo.hash_table.hash_table_repo import HashTableABC, Elem
 
 table_len = 100
 
@@ -10,6 +10,13 @@ class HashTableLine(HashTableABC):
     KEY_LEN = 6
     MAX_K = 30
     C, D = 1, 1
+
+    def get_all(self) -> list[Elem]:
+        result = []
+        for i in range(table_len):
+            if self.dict[i].key:
+                result.append(self.dict[i])
+        return result
 
     def hash(self, key) -> int:
         hash_value = 5381
@@ -36,7 +43,7 @@ class HashTableLine(HashTableABC):
                 self.dict[id].data = data
                 return
 
-    def find(self, key: str) -> int:
+    def find(self, key: str, need_id=False) -> Any:
         k = 0
         i = -1
         while True:
@@ -48,7 +55,9 @@ class HashTableLine(HashTableABC):
             if k > self.MAX_K:
                 return -1
             if self.dict[id].key == key:
-                return id
+                if need_id:
+                    return id
+                return self.dict[id].data
 
     def find_by_index(self, index) -> str:
         if index >= table_len:
@@ -65,7 +74,7 @@ class HashTableLine(HashTableABC):
         print()
 
     def remove(self, key: str) -> None:
-        id = self.find(key)
+        id = self.find(key, need_id=True)
         if id != -1:
             self.dict[id].deleted = True
             self.dict[id].key = ""
@@ -79,5 +88,5 @@ class HashTableLine(HashTableABC):
                     key = key[:j] + str(random.randint(0, 9)) + key[j+1:]
                 else:
                     key = key[:j] + chr(random.randint(ord('A'), ord('Z'))) + key[j+1:]
-            self.insert(key)
+            self.insert(key, '123')
 

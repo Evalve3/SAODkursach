@@ -16,6 +16,15 @@ class TestTable(unittest.TestCase):
         self.table.insert("L241YY", "L241YY")
         self.assertFalse(self.table.find("L241YY") == -1)
 
+    def test_get_all(self):
+        self.table.insert("A911KI", "A911KI")
+        self.table.insert("L241YY", "L241YY")
+        self.table.insert("C789FG", "C789FG")
+        res = self.table.get_all()
+        self.assertEqual(len(res), 3)
+        self.table.print()
+
+
     def test_add_duplicate(self):
         self.table.insert("A911KI", "A911KI")
         self.assertFalse(self.table.find("A911KI") == -1)

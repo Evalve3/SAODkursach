@@ -4,8 +4,7 @@ from src.core.dto.sim_dto import Sim
 from src.core.repo.hash_table.hash_table_repo import HashTableABC
 
 
-class SimRepo(metaclass=ABCMeta):
-    @abstractmethod
+class SimRepoABC(metaclass=ABCMeta):
     def __init__(self, hash_table: HashTableABC):
         self.sim_list = hash_table
 
