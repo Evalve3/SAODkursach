@@ -13,6 +13,7 @@ class HashTableABC(metaclass=ABCMeta):
 
     def __init__(self, table_len):
         self.dict = [Elem() for _ in range(table_len)]
+        self.table_len = table_len
 
     @abstractmethod
     def hash(self, key: str) -> int:
@@ -32,6 +33,14 @@ class HashTableABC(metaclass=ABCMeta):
 
     @abstractmethod
     def find(self, key: str) -> Any:
+        pass
+
+    @abstractmethod
+    def clear_data(self, key: str) -> None:
+        pass
+
+    @abstractmethod
+    def remove_all(self) -> None:
         pass
 
     @abstractmethod

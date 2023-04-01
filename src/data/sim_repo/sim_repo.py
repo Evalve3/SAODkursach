@@ -11,14 +11,14 @@ class SimRepo(SimRepoABC):
         self.sim_list.remove(sim.sim_number)
 
     def find_by_number(self, number: str) -> Sim:
-        return self.sim_list.find(number).data
+        return self.sim_list.find(number)
 
     def get_all(self) -> list[Sim]:
         return [node.data for node in self.sim_list.get_all()]
 
-    def clear_data(self, sim: Sim) -> None:
-        pass
+    def remove_all(self) -> None:
+        self.sim_list.remove_all()
 
     def find_by_tariff(self, tariff: str) -> list[Sim]:
-        pass
+        return [node.data for node in self.sim_list.get_all() if node.data.tariff_plan == tariff]
 

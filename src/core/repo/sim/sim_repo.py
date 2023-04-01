@@ -25,7 +25,7 @@ class SimRepoABC(metaclass=ABCMeta):
         pass
 
     @abstractmethod
-    def clear_data(self, sim: Sim) -> None:
+    def remove_all(self) -> None:
         pass
 
     @abstractmethod

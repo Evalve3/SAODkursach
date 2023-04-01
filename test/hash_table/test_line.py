@@ -6,9 +6,16 @@ from src.data.hash_table.hash_table_line import HashTableLine
 class TestTable(unittest.TestCase):
 
     def setUp(self):
-        self.table = HashTableLine(100)
+        self.table = HashTableLine(123)
         # self.table.fill_table(self.table)
         self.table.print()
+
+    def test_remove_all(self):
+        self.table.insert("A911KI", "A911KI")
+        self.table.insert("L241YY", "L241YY")
+        self.table.insert("C789FG", "C789FG")
+        self.table.remove_all()
+        self.assertEqual(len(self.table.get_all()), 0)
 
     def test_add(self):
         self.table.insert("A911KI", "A911KI")
