@@ -1,9 +1,11 @@
 from abc import abstractmethod, ABCMeta
+from typing import Any
 
 
 class Elem:
     def __init__(self):
         self.key = ''
+        self.data = None
         self.deleted = False
 
 
@@ -17,7 +19,7 @@ class HashTableABC(metaclass=ABCMeta):
         pass
 
     @abstractmethod
-    def insert(self, key: str) -> None:
+    def insert(self, key: str, data: Any) -> None:
         pass
 
     @abstractmethod

@@ -1,23 +1,28 @@
-class Elem:
-    def __init__(self):
-        self.value = None
-        self.next = None
-        self.prev = None
+from src.core.repo.my_list.my_list_repo import ListABC, Elem
 
 
-class List:
-    def __init__(self):
-        self.count = 0
-        self.head = None
-        self.tail = None
+class List(ListABC):
+
+    def cocktail_sort(self) -> None:
+        if self.count == 0:
+            raise IndexError('List is empty')
+        left = 0
+        right = self.count - 1
+        while left <= right:
+            for i in range(left, right):
+                if self.get_elem(i).value > self.get_elem(i + 1).value:
+                    self.get_elem(i).value, self.get_elem(i + 1).value = self.get_elem(i + 1).value, self.get_elem(i).value
+            right -= 1
+            for i in range(right, left, -1):
+                if self.get_elem(i - 1).value > self.get_elem(i).value:
+                    self.get_elem(i).value, self.get_elem(i - 1).value = self.get_elem(i - 1).value, self.get_elem(i).value
+            left += 1
 
     def get_len(self):
         return self.count
 
-    def add_tail(self, value=None):
+    def add_tail(self, value: int) -> None:
         tmp = Elem()
-        if value is None:
-            value = int(input())
         if self.count == 0:
             self.head = self.tail = tmp
             tmp.next = tmp
@@ -31,13 +36,13 @@ class List:
         tmp.value = value
         self.count += 1
 
-    def show_list(self):
+    def print(self) -> None:
         tmp = self.head
         for i in range(self.count):
             print(tmp.value, end=' ')
             tmp = tmp.next
 
-    def get_elem(self, position):
+    def get_elem(self, position) -> Elem:
         elem = self.head
         i = 0
         while i < position:
@@ -45,7 +50,7 @@ class List:
             i += 1
         return elem
 
-    def del_elem(self, position):
+    def remove(self, position) -> None:
         if self.count == 0:
             raise IndexError('List is empty')
         if position >= self.count or position < 0:
@@ -66,6 +71,6 @@ class List:
         del del_node
         self.count -= 1
 
-    def del_list(self):
+    def del_list(self) -> None:
         while self.count != 0:
-            self.del_elem(0)
+            self.remove(0)

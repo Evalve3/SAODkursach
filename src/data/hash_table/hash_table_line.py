@@ -1,8 +1,7 @@
-import re
 import random
-import math
+from typing import Any
 
-from src.core.hash_table.hash_table_repo import HashTableABC
+from src.core.repo.hash_table.hash_table_repo import HashTableABC
 
 table_len = 100
 
@@ -12,22 +11,14 @@ class HashTableLine(HashTableABC):
     MAX_K = 30
     C, D = 1, 1
 
-    @staticmethod
-    def is_key(key) -> bool:
-        r = re.compile(r"^[A-Z][0-9]{3}[A-Z]{2}$")
-        return r.match(key) is not None
-
     def hash(self, key) -> int:
         hash_value = 5381
         for char in key:
             hash_value = ((hash_value << 5) + hash_value) + ord(char)
         return hash_value % table_len
 
-    def insert(self, key: str) -> None:
+    def insert(self, key: str, data: Any) -> None:
         k = 0
-        if not self.is_key(key):
-            print("Incorrect key")
-            return
         i = -1
         while True:
             i += 1
@@ -42,12 +33,10 @@ class HashTableLine(HashTableABC):
 
             if not self.dict[id].key:
                 self.dict[id].key = key
+                self.dict[id].data = data
                 return
 
     def find(self, key: str) -> int:
-        if not self.is_key(key):
-            print("Incorrect key")
-            return -1
         k = 0
         i = -1
         while True:
@@ -76,9 +65,6 @@ class HashTableLine(HashTableABC):
         print()
 
     def remove(self, key: str) -> None:
-        if not self.is_key(key):
-            print("Incorrect key")
-            return
         id = self.find(key)
         if id != -1:
             self.dict[id].deleted = True

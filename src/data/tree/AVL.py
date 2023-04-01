@@ -1,38 +1,50 @@
-from typing import Optional
+from typing import Optional, Any
 
-from src.core.tree.tree_repo import Node, TreeABC
+from src.core.repo.tree.tree_repo import Node, TreeABC
 
 
 class AvlTree(TreeABC):
 
-    def find(self, key: int) -> bool:
+    def find(self, key: str) -> Optional[Node]:
         return self.__find(self.root, key)
 
-    def insert(self, key: int) -> None:
-        self.root = self.__insert(self.root, key)
+    def insert(self, key: str, data: Any) -> None:
+        self.root = self.__insert(self.root, key, data)
 
-    def remove(self, key: int) -> None:
+    def remove(self, key: str) -> None:
         self.root = self.__remove(self.root, key)
+
+    def clear_data(self, key: str) -> None:
+        self.__clear_data(self.root, key)
+
+    def __clear_data(self, node: Node, key: str) -> None:
+        self.__find(node, key).data = None
 
     def print(self) -> None:
         return self.__print_tree(self.root, False, '')
 
-    def preorder_traversal(self, root='0') -> None:
+    def get_all(self) -> list[Node]:
+        return self._preorder_traversal()
+
+    def _preorder_traversal(self, root='0', ans: list = None) -> list[Node]:
+        if ans is None:
+            ans = []
         if root == '0':
             root = self.root
         if root:
-            print(root.key, end=' ')
-            self.preorder_traversal(root.left)
-            self.preorder_traversal(root.right)
+            ans.append(root)
+            self._preorder_traversal(root.left, ans)
+            self._preorder_traversal(root.right, ans)
+        return ans
 
-    def __find(self, node: Node, key: int) -> bool:
+    def __find(self, node: Node, key: str) -> Optional[Node]:
         if not node:
-            return False
+            return None
         if key < node.key:
             return self.__find(node.left, key)
         if key > node.key:
             return self.__find(node.right, key)
-        return True
+        return node
 
     def __height(self, node: Node) -> int:
         return node.height if node else 0
@@ -74,13 +86,13 @@ class AvlTree(TreeABC):
             return self.__right_rotate(node)
         return node
 
-    def __insert(self, node: Node, key: int):
+    def __insert(self, node: Node, key: str, data: Any) -> Node:
         if not node:
-            return Node(key=key, height=1)
+            return Node(key=key, height=1, data=data)
         if key < node.key:
-            node.left = self.__insert(node.left, key)
+            node.left = self.__insert(node.left, key, data)
         if key > node.key:
-            node.right = self.__insert(node.right, key)
+            node.right = self.__insert(node.right, key, data)
         return self.__balance(node)
 
     def __find_min(self, node: Node) -> Node:
@@ -92,7 +104,7 @@ class AvlTree(TreeABC):
         node.left = self.__remove_min(node.left)
         return self.__balance(node)
 
-    def __remove(self, node: Node, key: int) -> Optional[Node]:
+    def __remove(self, node: Node, key: str) -> Optional[Node]:
         if not node:
             return None
         if key < node.key:
@@ -113,34 +125,11 @@ class AvlTree(TreeABC):
         return self.__balance(node)
 
     def __print_tree(self, node: Node, is_left: bool, prefix: str):
-        if node is not None:
-            print(prefix, end="")
-            if is_left:
-                print("╠══", end="")
-            else:
-                print('╚══', end="")
-            print(f"{node.key: 2}")
-            self.__print_tree(node.right, True, prefix + ("║   " if is_left else "   "))
-            self.__print_tree(node.left, False, prefix + ("║   " if is_left else "   "))
+        if node:
+            self.__print_tree(node.right, False, prefix + ('│   ' if is_left else '    '))
+            print(prefix + ('└── ' if is_left else '┌── ') + str(node.key))
+            self.__print_tree(node.left, True, prefix + ('    ' if is_left else '│   '))
 
 
-if __name__ == "__main__":
-    tree = AvlTree()
-    tree.insert(9)
-    tree.insert(3)
-    tree.insert(5)
-    tree.insert(15)
-    tree.insert(11)
-    tree.insert(21)
-    tree.insert(9)
-    tree.insert(13)
-    tree.insert(10)
-    tree.print()
-    tree.remove(15)
-    tree.print()
-    tree.remove(13)
-    tree.print()
-    tree.insert(23)
-    tree.print()
-    print(tree.find(23))
-    print(tree.find(24))
+
+
