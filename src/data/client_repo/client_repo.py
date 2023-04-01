@@ -8,6 +8,9 @@ class ClientRepo(ClientRepoABC):
         self.search_in_text = search_int_text
         """
 
+    def remove_all(self) -> None:
+        self.client_tree.remove_all()
+
     def add(self, client: Client) -> None:
         self.client_tree.insert(client.passport_number, client)
 
@@ -25,6 +28,6 @@ class ClientRepo(ClientRepoABC):
 
     def find_by_text(self, text: str) -> list[Client]:
         search_func = self.search_in_text.search
-        print(self.client_tree.get_all())
+        # print(self.client_tree.get_all())
         return [node.data for node in self.client_tree.get_all() if
                 search_func(node.data.passport_number, text) or search_func(node.data.address, text)]

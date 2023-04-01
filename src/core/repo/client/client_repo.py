@@ -28,7 +28,7 @@ class ClientRepoABC(metaclass=ABCMeta):
         pass
 
     @abstractmethod
-    def clear_data(self, client: Client) -> None:
+    def remove_all(self) -> None:
         pass
 
     @abstractmethod

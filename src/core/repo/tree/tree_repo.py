@@ -39,5 +39,5 @@ class TreeABC(metaclass=ABCMeta):
         pass
 
     @abstractmethod
-    def clear_data(self, key: str) -> None:
+    def remove_all(self) -> None:
         pass

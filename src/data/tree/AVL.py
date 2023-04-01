@@ -14,6 +14,9 @@ class AvlTree(TreeABC):
     def remove(self, key: str) -> None:
         self.root = self.__remove(self.root, key)
 
+    def remove_all(self) -> None:
+        self.root = None
+
     def clear_data(self, key: str) -> None:
         self.__clear_data(self.root, key)
 
