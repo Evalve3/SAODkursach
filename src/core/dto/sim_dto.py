@@ -8,6 +8,14 @@ class Sim:
     year_of_issue: int
     has: bool
 
+    @classmethod
+    def input_sim(cls):
+        sim_number = input('Enter sim number: ')
+        tariff_plan = input('Enter tariff plan: ')
+        year_of_issue = int(input('Enter year of issue: '))
+        has = False
+        return cls(sim_number, tariff_plan, year_of_issue, has)
+
     def __eq__(self, other):
         return self.sim_number == other.sim_number
 

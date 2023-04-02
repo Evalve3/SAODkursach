@@ -3,7 +3,7 @@ from src.core.dto.sim_dto import Sim
 from src.core.repo.usecase.presenterABC import PresenterABC
 
 
-class SimByTariffPresenter(PresenterABC):
+class SimByClientfPresenter(PresenterABC):
 
     def present(self, response: (Sim, Client)):
         # номер, тариф, год выпуска, активность, имя, паспорт

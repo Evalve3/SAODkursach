@@ -7,5 +7,5 @@ class GetAllSimUC(UseCaseABC):
     def __init__(self, sim_repo: SimRepoABC):
         self.sim_repo = sim_repo
 
-    def execute(self, sim: Sim) -> list[Sim]:
+    def execute(self) -> list[Sim]:
         return self.sim_repo.get_all()

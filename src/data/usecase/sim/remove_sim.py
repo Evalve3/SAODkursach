@@ -5,14 +5,14 @@ from src.core.repo.usecase.usecaseABC import UseCaseABC
 
 
 class RemoveSimUC(UseCaseABC):
-    def __init__(self, sim_repo: SimRepoABC, sim_clients_repo: ClientSimsABC) -> None:
+    def __init__(self, sim_repo: SimRepoABC, sim_client_repo: ClientSimsABC) -> None:
         self.sim_repo = sim_repo
-        self.sim_clients_repo = sim_clients_repo
+        self.sim_clients_repo = sim_client_repo
 
     def execute(self, sim: Sim) -> bool:
         try:
             self.sim_clients_repo.find_by_sim_number(sim.sim_number)
-        except ValueError:
             return False
-        self.sim_repo.remove(sim)
-        return True
+        except ValueError:
+            self.sim_repo.remove(sim)
+            return True

@@ -1,4 +1,5 @@
 from src.core.dto.client_dto import Client
+from src.core.dto.sim_dto import Sim
 from src.data.algorithms.search_in_text.in_search import InSearch
 from src.data.client_repo.client_repo import ClientRepo
 from src.data.data_structures.hash_table.hash_table_line import HashTableLine
@@ -12,6 +13,14 @@ from src.data.usecase.client.get_all_clients import GetAllClientsUC
 from src.data.usecase.client.new_client import RegisterNewClientUC
 from src.data.usecase.client.remo_all_clients import RemoveAllClientsUC
 from src.data.usecase.client.remove_client import RemoveClientUC
+from src.data.usecase.sim.add_new_sim import AddNewSimUC
+from src.data.usecase.sim.find_by_tariff import FindSimByTariffUC
+from src.data.usecase.sim.get_all_sims import GetAllSimUC
+from src.data.usecase.sim.presenters.sim_by_tariff_presenter import SimByTariffPresenter
+from src.data.usecase.sim.remove_all_sim import RemoveAllSimUC
+from src.data.usecase.sim.remove_sim import RemoveSimUC
+from src.data.usecase.sim_clients.client_by_sim_number import ClientBySimNumber
+from src.data.usecase.sim_clients.presenters.client_by_sim_numer import SimByClientfPresenter
 
 
 def main():
@@ -22,6 +31,8 @@ def main():
     client_repo = ClientRepo(tree=tree(), search_in_text=search_func())
     sim_repo = SimRepo(hash_table=hash_table(1000))
     sim_issue_refund_repo = SimClientIssueRefundRepo(lst=lst())
+    sim_cleint_presenter = SimByClientfPresenter()
+    sim_tariff_presenter = SimByTariffPresenter()
     while True:
         print("Выберите действие:")
         print("1. Регистрация нового клиента")
@@ -80,32 +91,56 @@ def main():
             print(usecase.execute(text))
         elif choice == "7":
             # вызов функции добавления новой SIM-карты
-            add_new_sim_card()
+            usecase = AddNewSimUC(sim_repo=sim_repo)
+            try:
+                sim = Sim.input_sim()
+            except Exception as e:
+                print(e)
+                continue
+            usecase.execute(sim)
         elif choice == "8":
             # вызов функции удаления сведений о SIM-карте
-            remove_sim_card()
+            usecase = RemoveSimUC(sim_repo=sim_repo, sim_client_repo=sim_issue_refund_repo)
+            try:
+                sim = Sim.input_sim()
+            except Exception as e:
+                print(e)
+                continue
+            if usecase.execute(sim):
+                print("SIM-карта успешно удалена")
+            else:
+                print("SIM-карта кому-то принадлежит")
         elif choice == "9":
             # вызов функции просмотра всех имеющихся SIM-карт
-            view_all_sim_cards()
+            usecase = GetAllSimUC(sim_repo=sim_repo)
+            print(usecase.execute())
         elif choice == "10":
             # вызов функции очистки данных о SIM-картах
-            clear_sim_card_data()
+            usecase = RemoveAllSimUC(sim_repo=sim_repo)
+            usecase.execute()
         elif choice == "11":
             # вызов функции поиска SIM-карты по номеру SIM-карты
-            search_sim_card_by_number()
+            # sim_clients_repo: ClientSimsABC, client_repo: ClientRepoABC, presenter: PresenterABC
+            usecase = ClientBySimNumber(sim_clients_repo=sim_issue_refund_repo, client_repo=client_repo,
+                                        presenter=sim_cleint_presenter)
+            sim_number = input("Введите номер SIM-карты: ")
+            print(usecase.execute(sim_number))
         elif choice == "12":
             # вызов функции поиска SIM-карты по тарифу
-            search_sim_card_by_tariff()
+            usecase = FindSimByTariffUC(sim_repo=sim_repo, presenter=sim_tariff_presenter)
+            tariff = input("Введите тариф: ")
+            print(usecase.execute(tariff))
         elif choice == "13":
             # вызов функции регистрации выдачи клиенту SIM-карты
-            register_sim_card_issue()
+            pass
         elif choice == "14":
             # вызов функции регистрации возврата SIM-карты от клиента
-            register_sim_card_return()
+            pass
         elif choice == "0":
             # выход из программы
             print("Выход из программы")
             break
+
 
 if __name__ == "__main__":
     main()
