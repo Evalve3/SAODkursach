@@ -21,3 +21,7 @@ class ClientSimsABC(metaclass=ABCMeta):
     @abstractmethod
     def register_sim_number(self, client: Client, sim: Sim, date_end: str) -> None:
         pass
+
+    @abstractmethod
+    def remove_sim(self, sim: Sim) -> None:
+        pass

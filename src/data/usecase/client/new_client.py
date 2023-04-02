@@ -9,4 +9,3 @@ class RegisterNewClientUC(UseCaseABC):
 
     def execute(self, client: Client) -> None:
         self.client_repo.add(client)
-        

@@ -1,4 +1,3 @@
-from src.core.dto.client_dto import Client
 from src.core.repo.client.client_repo import ClientRepoABC
 from src.core.repo.usecase.usecaseABC import UseCaseABC
 

@@ -9,9 +9,9 @@ from src.core.repo.data_structures.tree.tree_repo import TreeABC
 
 class ClientRepoABC(metaclass=ABCMeta):
 
-    def __init__(self, tree: TreeABC, search_int_text: SearchInTextABC) -> None:
+    def __init__(self, tree: TreeABC, search_in_text: SearchInTextABC) -> None:
         self.client_tree = tree
-        self.search_in_text = search_int_text
+        self.search_in_text = search_in_text
 
     @abstractmethod
     def add(self, client: Client) -> None:

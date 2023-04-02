@@ -4,12 +4,16 @@ from typing import Any
 from src.core.repo.data_structures.hash_table.hash_table_repo import HashTableABC, Elem
 
 
-
 class HashTableLine(HashTableABC):
 
     KEY_LEN = 6
     MAX_K = 30
     C, D = 1, 1
+
+    def edit_data(self, key: str, data: dict) -> None:
+        id = self.find(key, True)
+        if id != -1:
+            self.dict[id].data.__dict__.update(data)
 
     def remove_all(self) -> None:
         all = self.get_all()

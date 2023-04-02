@@ -14,5 +14,5 @@ class RegisterSimNumber(UseCaseABC):
         if not sim.has:
             return False
         self.sim_clients_repo.register_sim_number(client, sim, date_end)
-        sim.has = False
+        self.sim_repo.edit_sim(sim, {'has': False})
         return True

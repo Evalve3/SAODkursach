@@ -57,3 +57,8 @@ class TestSimRepo(unittest.TestCase):
         self.assertEqual(len(self.repo.find_by_tariff("Tariff Plan E")), 1)
         self.assertEqual(len(self.repo.find_by_tariff("Tariff Plan F")), 0)
 
+    def test_edit_data(self):
+        self.repo.add(self.sim1)
+        self.repo.edit_sim(self.sim1, {"tariff_plan": "Tariff Plan F"})
+        self.assertEqual(self.repo.find_by_number("111-1111111").tariff_plan, "Tariff Plan F")
+

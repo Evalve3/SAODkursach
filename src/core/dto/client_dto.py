@@ -10,6 +10,15 @@ class Client:
     year_of_birth: int
     address: str
 
+    @classmethod
+    def input_client(cls):
+        passport_number = input('Enter passport number: ')
+        place_date_of_issue = input('Enter place date of issue: ')
+        full_name = input('Enter full name: ')
+        year_of_birth = int(input('Enter year of birth: '))
+        address = input('Enter address: ')
+        return cls(passport_number, place_date_of_issue, full_name, year_of_birth, address)
+
     def __eq__(self, other):
         return self.passport_number == other.passport_number
 

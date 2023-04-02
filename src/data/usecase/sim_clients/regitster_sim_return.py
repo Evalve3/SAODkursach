@@ -4,15 +4,12 @@ from src.core.repo.sim.sim_repo import SimRepoABC
 from src.core.repo.usecase.usecaseABC import UseCaseABC
 
 
-class RemoveSimUC(UseCaseABC):
-    def __init__(self, sim_repo: SimRepoABC, sim_clients_repo: ClientSimsABC) -> None:
-        self.sim_repo = sim_repo
+class RegisterSimReturnNumber(UseCaseABC):
+    def __init__(self, sim_clients_repo: ClientSimsABC, sim_repo: SimRepoABC) -> None:
         self.sim_clients_repo = sim_clients_repo
+        self.sim_repo = sim_repo
 
     def execute(self, sim: Sim) -> bool:
-        try:
-            self.sim_clients_repo.find_by_sim_number(sim.sim_number)
-        except ValueError:
-            return False
-        self.sim_repo.remove(sim)
+        self.sim_clients_repo.remove_sim(sim)
+        self.sim_repo.edit_sim(sim, {'has': True})
         return True

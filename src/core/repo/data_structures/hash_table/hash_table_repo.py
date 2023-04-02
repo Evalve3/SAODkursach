@@ -36,7 +36,7 @@ class HashTableABC(metaclass=ABCMeta):
         pass
 
     @abstractmethod
-    def clear_data(self, key: str) -> None:
+    def edit_data(self, key: str, data: dict) -> None:
         pass
 
     @abstractmethod

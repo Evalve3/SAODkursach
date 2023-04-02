@@ -13,6 +13,13 @@ class SimClientIssueRefundRepo(ClientSimsABC):
                 return sim
         raise ValueError("Sim not found")
 
+    def remove_sim(self, sim: Sim) -> None:
+        for i in range(len(self.sim_list)):
+            if self.sim_list[i].sim_number == sim.sim_number:
+                self.sim_list.remove(i)
+                return
+        raise ValueError("Sim not found")
+
     def find_client_sims(self, client: Client) -> list[SimIssueRefund]:
         ans = []
         for sim in self.sim_list:
