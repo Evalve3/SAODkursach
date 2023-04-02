@@ -1,8 +1,10 @@
 from abc import abstractmethod, ABCMeta
 
 from src.core.dto.client_dto import Client
-from src.core.repo.search_in_text.search_text_repo import SearchInTextABC
-from src.core.repo.tree.tree_repo import TreeABC
+from src.core.dto.sim_dto import Sim
+from src.core.dto.sim_return_dto import SimIssueRefund
+from src.core.repo.algorithms.search_in_text.search_text_repo import SearchInTextABC
+from src.core.repo.data_structures.tree.tree_repo import TreeABC
 
 
 class ClientRepoABC(metaclass=ABCMeta):

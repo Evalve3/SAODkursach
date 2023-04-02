@@ -1,6 +1,6 @@
 from typing import Optional, Any
 
-from src.core.repo.tree.tree_repo import Node, TreeABC
+from src.core.repo.data_structures.tree.tree_repo import Node, TreeABC
 
 
 class AvlTree(TreeABC):

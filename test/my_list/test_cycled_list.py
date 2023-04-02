@@ -1,7 +1,8 @@
 import unittest
 import io
 
-from src.data.my_list.cycled_list import List
+from src.core.dto.sim_dto import Sim
+from src.data.data_structures.my_list.cycled_list import List
 from unittest.mock import patch
 
 
@@ -76,3 +77,20 @@ class TestList(unittest.TestCase):
         self.assertEqual(self.lst.get_len(), 0)
         self.assertIsNone(self.lst.head)
         self.assertIsNone(self.lst.tail)
+
+    def test_find_by_data(self):
+        sim1 = Sim(sim_number='123-1234567', tariff_plan='tariff1', year_of_issue=2020, active=True)
+        sim2 = Sim(sim_number='123-1234568', tariff_plan='tariff2', year_of_issue=2021, active=True)
+        sim3 = Sim(sim_number='123-1234569', tariff_plan='tariff3', year_of_issue=2022, active=True)
+        self.lst.add_tail(sim1)
+        self.lst.add_tail(sim2)
+        self.lst.add_tail(sim3)
+        self.assertIn(sim1, self.lst.find_by_data({'sim_number': '123-1234567'}))
+        self.assertIn(sim2, self.lst.find_by_data({'tariff_plan': 'tariff2'}))
+        self.assertIn(sim3, self.lst.find_by_data({'year_of_issue': 2022}))
+        self.assertIn(sim1, self.lst.find_by_data({'active': True}))
+        self.assertIn(sim2, self.lst.find_by_data({'active': True}))
+        self.assertIn(sim3, self.lst.find_by_data({'active': True}))
+
+
+

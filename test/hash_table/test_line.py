@@ -1,6 +1,6 @@
 import unittest
 
-from src.data.hash_table.hash_table_line import HashTableLine
+from src.data.data_structures.hash_table.hash_table_line import HashTableLine
 
 
 class TestTable(unittest.TestCase):

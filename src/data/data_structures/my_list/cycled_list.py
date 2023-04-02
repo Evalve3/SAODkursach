@@ -1,7 +1,18 @@
-from src.core.repo.my_list.my_list_repo import ListABC, Elem
+from src.core.repo.data_structures.my_list.my_list_repo import ListABC, Elem
 
 
 class List(ListABC):
+
+    def find_by_data(self, data: dict) -> list[any]:
+        if self.count == 0:
+            raise IndexError('List is empty')
+        tmp = self.head
+        ans = []
+        for i in range(self.count):
+            if data.items() <= tmp.value.__dict__.items():
+                ans.append(tmp.value)
+            tmp = tmp.next
+        return ans
 
     def cocktail_sort(self) -> None:
         if self.count == 0:
@@ -21,7 +32,7 @@ class List(ListABC):
     def get_len(self):
         return self.count
 
-    def add_tail(self, value: int) -> None:
+    def add_tail(self, value: any) -> None:
         tmp = Elem()
         if self.count == 0:
             self.head = self.tail = tmp

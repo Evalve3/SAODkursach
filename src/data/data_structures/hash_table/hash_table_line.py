@@ -1,7 +1,7 @@
 import random
 from typing import Any
 
-from src.core.repo.hash_table.hash_table_repo import HashTableABC, Elem
+from src.core.repo.data_structures.hash_table.hash_table_repo import HashTableABC, Elem
 
 
 

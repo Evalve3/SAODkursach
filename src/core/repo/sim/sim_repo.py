@@ -1,7 +1,7 @@
 from abc import abstractmethod, ABCMeta
 
 from src.core.dto.sim_dto import Sim
-from src.core.repo.hash_table.hash_table_repo import HashTableABC
+from src.core.repo.data_structures.hash_table.hash_table_repo import HashTableABC
 
 
 class SimRepoABC(metaclass=ABCMeta):

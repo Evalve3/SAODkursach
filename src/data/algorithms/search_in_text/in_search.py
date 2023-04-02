@@ -1,4 +1,4 @@
-from src.core.repo.search_in_text.search_text_repo import SearchInTextABC
+from src.core.repo.algorithms.search_in_text.search_text_repo import SearchInTextABC
 
 
 class InSearch(SearchInTextABC):

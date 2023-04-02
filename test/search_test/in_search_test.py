@@ -1,6 +1,6 @@
 import unittest
 
-from src.data.search_in_text.in_search import InSearch
+from src.data.algorithms.search_in_text.in_search import InSearch
 
 
 class TestInSearch(unittest.TestCase):

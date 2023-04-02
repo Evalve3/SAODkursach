@@ -1,6 +1,6 @@
 import unittest
 
-from src.data.tree.AVL import AvlTree
+from src.data.data_structures.tree.AVL import AvlTree
 
 
 class TestAvl(unittest.TestCase):

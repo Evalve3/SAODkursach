@@ -1,4 +1,6 @@
 from src.core.dto.client_dto import Client
+from src.core.dto.sim_dto import Sim
+from src.core.dto.sim_return_dto import SimIssueRefund
 from src.core.repo.client.client_repo import ClientRepoABC
 
 
@@ -22,9 +24,6 @@ class ClientRepo(ClientRepoABC):
 
     def get_all(self) -> list[Client]:
         return [node.data for node in self.client_tree.get_all()]
-
-    def clear_data(self, client: Client) -> None:
-        self.client_tree.clear_data(client.passport_number)
 
     def find_by_text(self, text: str) -> list[Client]:
         search_func = self.search_in_text.search

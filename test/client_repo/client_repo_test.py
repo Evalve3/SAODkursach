@@ -2,8 +2,8 @@ import unittest
 
 from src.core.dto.client_dto import Client
 from src.data.client_repo.client_repo import ClientRepo
-from src.data.search_in_text.in_search import InSearch
-from src.data.tree.AVL import AvlTree
+from src.data.algorithms.search_in_text.in_search import InSearch
+from src.data.data_structures.tree.AVL import AvlTree
 
 
 class TestClientRepo(unittest.TestCase):

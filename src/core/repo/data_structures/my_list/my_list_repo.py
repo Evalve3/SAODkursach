@@ -14,8 +14,14 @@ class ListABC(metaclass=ABCMeta):
         self.head = None
         self.tail = None
 
+    def __len__(self):
+        return self.count
+
+    def __getattr__(self, item):
+        return self.get_elem(item).value
+
     @abstractmethod
-    def add_tail(self, value: int) -> None:
+    def add_tail(self, value: any) -> None:
         pass
 
     @abstractmethod
@@ -28,4 +34,8 @@ class ListABC(metaclass=ABCMeta):
 
     @abstractmethod
     def get_elem(self, position: int) -> Elem:
+        pass
+
+    @abstractmethod
+    def find_by_data(self, data: dict) -> list[any]:
         pass

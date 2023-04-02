@@ -9,6 +9,21 @@ class SimIssueRefund:
     date_of_issue: str
     date_end: str
 
+    def __eq__(self, other):
+        return self.sim_number == other.sim_number
+
+    def __lt__(self, other):
+        return self.sim_number < other.sim_number
+
+    def __gt__(self, other):
+        return self.sim_number > other.sim_number
+
+    def __le__(self, other):
+        return self.sim_number <= other.sim_number
+
+    def __ge__(self, other):
+        return self.sim_number >= other.sim_number
+
     def __post_init__(self):
         self._validate_passport_number()
         self._validate_sim_number()

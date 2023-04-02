@@ -10,6 +10,21 @@ class Client:
     year_of_birth: int
     address: str
 
+    def __eq__(self, other):
+        return self.passport_number == other.passport_number
+
+    def __lt__(self, other):
+        return self.passport_number < other.passport_number
+
+    def __gt__(self, other):
+        return self.passport_number > other.passport_number
+
+    def __le__(self, other):
+        return self.passport_number <= other.passport_number
+
+    def __ge__(self, other):
+        return self.passport_number >= other.passport_number
+
     def __post_init__(self):
         self._validate_passport_number()
         self._validate_place_date_of_issue()
