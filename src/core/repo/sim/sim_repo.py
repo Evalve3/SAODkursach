@@ -31,3 +31,7 @@ class SimRepoABC(metaclass=ABCMeta):
     @abstractmethod
     def find_by_tariff(self, tariff: str) -> list[Sim]:
         pass
+
+    @abstractmethod
+    def edit_sim(self, sim: Sim, data: dict) -> None:
+        pass

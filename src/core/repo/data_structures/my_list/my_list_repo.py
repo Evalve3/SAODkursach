@@ -21,6 +21,14 @@ class ListABC(metaclass=ABCMeta):
         return self.get_elem(item).value
 
     @abstractmethod
+    def __iter__(self):
+        pass
+
+    @abstractmethod
+    def __next__(self):
+        pass
+
+    @abstractmethod
     def add_tail(self, value: any) -> None:
         pass
 

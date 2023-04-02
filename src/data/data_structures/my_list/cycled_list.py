@@ -14,6 +14,19 @@ class List(ListABC):
             tmp = tmp.next
         return ans
 
+    def __iter__(self):
+        self.cur = self.head
+        self.__iter = 0
+        return self
+
+    def __next__(self):
+        if self.cur is None or self.__iter == self.count:
+            raise StopIteration
+        ans = self.cur.value
+        self.__iter += 1
+        self.cur = self.cur.next
+        return ans
+
     def cocktail_sort(self) -> None:
         if self.count == 0:
             raise IndexError('List is empty')

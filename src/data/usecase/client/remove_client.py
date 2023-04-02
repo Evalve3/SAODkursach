@@ -9,6 +9,6 @@ class RemoveClientUC(UseCaseABC):
         self.client_repo = client_repo
         self.sim_repo = sim_repo
 
-    def execute(self, client: Client):
+    def execute(self, client: Client) -> None:
         self.client_repo.remove(client)
 

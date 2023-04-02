@@ -6,7 +6,7 @@ class Sim:
     sim_number: str
     tariff_plan: str
     year_of_issue: int
-    active: bool
+    has: bool
 
     def __eq__(self, other):
         return self.sim_number == other.sim_number
@@ -49,7 +49,7 @@ class Sim:
             raise ValueError('Invalid year of issue')
 
     def _validate_active(self) -> None:
-        if not isinstance(self.active, bool):
-            raise TypeError('Invalid type of active')
-        if self.active not in (True, False):
-            raise ValueError('Invalid active')
+        if not isinstance(self.has, bool):
+            raise TypeError('Invalid type of has')
+        if self.has not in (True, False):
+            raise ValueError('Invalid has')

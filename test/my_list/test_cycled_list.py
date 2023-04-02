@@ -10,6 +10,15 @@ class TestList(unittest.TestCase):
     def setUp(self):
         self.lst = List()
 
+    def test_iter(self):
+        self.lst.add_tail(1)
+        self.lst.add_tail(2)
+        self.lst.add_tail(3)
+        for i in self.lst:
+            print(i)
+        for i in self.lst:
+            print(i)
+
     def test_add_tail(self):
         self.lst.add_tail(1)
         self.lst.add_tail(2)
@@ -88,9 +97,9 @@ class TestList(unittest.TestCase):
         self.assertIn(sim1, self.lst.find_by_data({'sim_number': '123-1234567'}))
         self.assertIn(sim2, self.lst.find_by_data({'tariff_plan': 'tariff2'}))
         self.assertIn(sim3, self.lst.find_by_data({'year_of_issue': 2022}))
-        self.assertIn(sim1, self.lst.find_by_data({'active': True}))
-        self.assertIn(sim2, self.lst.find_by_data({'active': True}))
-        self.assertIn(sim3, self.lst.find_by_data({'active': True}))
+        self.assertIn(sim1, self.lst.find_by_data({'has': True}))
+        self.assertIn(sim2, self.lst.find_by_data({'has': True}))
+        self.assertIn(sim3, self.lst.find_by_data({'has': True}))
 
 
 
