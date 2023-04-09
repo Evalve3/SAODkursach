@@ -27,9 +27,10 @@ class List(ListABC):
         self.cur = self.cur.next
         return ans
 
-    def cocktail_sort(self) -> None:
+    def sort(self) -> None:
+        # cocktail sort
         if self.count == 0:
-            raise IndexError('List is empty')
+            return
         left = 0
         right = self.count - 1
         while left <= right:

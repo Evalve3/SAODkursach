@@ -17,7 +17,7 @@ class ListABC(metaclass=ABCMeta):
     def __len__(self):
         return self.count
 
-    def __getattr__(self, item):
+    def __getitem__(self, item):
         return self.get_elem(item).value
 
     @abstractmethod
@@ -46,4 +46,8 @@ class ListABC(metaclass=ABCMeta):
 
     @abstractmethod
     def find_by_data(self, data: dict) -> list[any]:
+        pass
+
+    @abstractmethod
+    def sort(self) -> None:
         pass

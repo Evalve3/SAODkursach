@@ -17,6 +17,7 @@ class SimClientIssueRefundRepo(ClientSimsABC):
         for i in range(len(self.sim_list)):
             if self.sim_list[i].sim_number == sim.sim_number:
                 self.sim_list.remove(i)
+                self.sim_list.sort()
                 return
         raise ValueError("Sim not found")
 
@@ -31,3 +32,4 @@ class SimClientIssueRefundRepo(ClientSimsABC):
         self.sim_list.add_tail(
             SimIssueRefund(sim_number=sim.sim_number, passport_number=client.passport_number, date_end=date_end,
                            date_of_issue=str(datetime.date.today())))
+        self.sim_list.sort()

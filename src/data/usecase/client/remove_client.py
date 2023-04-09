@@ -15,6 +15,9 @@ class RemoveClientUC(UseCaseABC):
         sims = self.sim_client_repo.find_client_sims(client)
         for sim in sims:
             sim_dto = self.sim_repo.find_by_number(sim.sim_number)
+            self.sim_repo.edit_sim(sim_dto, {'has': True})
             self.sim_client_repo.remove_sim(sim_dto)
+        if self.client_repo.find_by_passport(client.passport_number) is None:
+            raise ValueError("Клиент не найден")
         self.client_repo.remove(client)
 

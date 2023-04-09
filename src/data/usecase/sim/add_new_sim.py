@@ -8,4 +8,6 @@ class AddNewSimUC(UseCaseABC):
         self.sim_repo = sim_repo
 
     def execute(self, sim: Sim) -> None:
+        if self.sim_repo.find_by_number(sim.sim_number) is not None:
+            raise ValueError("Симкарта с таким номером уже существует")
         return self.sim_repo.add(sim)

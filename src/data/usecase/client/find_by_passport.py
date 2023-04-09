@@ -8,4 +8,7 @@ class FindByPassportUC(UseCaseABC):
         self.client_repo = client_repo
 
     def execute(self, passport_number: str) -> Client:
-        return self.client_repo.find_by_passport(passport_number)
+        result = self.client_repo.find_by_passport(passport_number)
+        if result is None:
+            raise ValueError("Клиент не найден")
+        return result

@@ -24,9 +24,9 @@ class TestSimClientIssueRefundRepo(unittest.TestCase):
                        date_end='2022-12-31')
         self.issuesim3 = SimIssueRefund(passport_number='1111-222222', sim_number='789-9876543', date_of_issue='2023-04-01',
                        date_end='2024-04-01')
-        self.sim1 = Sim(sim_number='123-4567890', tariff_plan='Plan A', year_of_issue=2022, active=True)
-        self.sim2 = Sim(sim_number='456-1234567', tariff_plan='Plan B', year_of_issue=2021, active=False)
-        self.sim3 = Sim(sim_number='789-9876543', tariff_plan='Plan C', year_of_issue=2020, active=True)
+        self.sim1 = Sim(sim_number='123-4567890', tariff_plan='Plan A', year_of_issue=2022, has=True)
+        self.sim2 = Sim(sim_number='456-1234567', tariff_plan='Plan B', year_of_issue=2021, has=False)
+        self.sim3 = Sim(sim_number='789-9876543', tariff_plan='Plan C', year_of_issue=2020, has=True)
 
     def test_register_client_sim(self):
         client = self.client1

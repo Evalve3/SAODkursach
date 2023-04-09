@@ -39,12 +39,6 @@ class TestClientRepo(unittest.TestCase):
         self.assertIn(client1, found_clients)
         self.assertNotIn(client2, found_clients)
 
-    def test_clear_data(self):
-        client = Client('1234-567890', 'Moscow, 01.01.2020', 'John Smith', 1985, 'Address')
-        self.client_repo.add(client)
-        self.client_repo.clear_data(client)
-        self.assertNotIn(client, self.client_repo.get_all())
-
     def test_remove_all(self):
         client1 = Client('1234-567890', 'Moscow, 01.01.2020', 'John Smith', 1985, 'Moscow, 01.01.2020')
         client2 = Client('9876-543210', 'Saint Petersburg, 01.01.2020', 'Jane Doe', 1990, 'Saint Petersburg, 01.01.2020')

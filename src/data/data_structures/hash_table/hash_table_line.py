@@ -45,7 +45,7 @@ class HashTableLine(HashTableABC):
 
             if self.dict[id].key == key:
                 self.dict[id].key = key
-                return
+                raise Exception("Ключ уже существует")
 
             if not self.dict[id].key:
                 self.dict[id].key = key

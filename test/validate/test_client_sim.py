@@ -90,7 +90,7 @@ class TestSimIssueRefund(unittest.TestCase):
         )
         sim_refund2 = SimIssueRefund(
             passport_number="1234-567290",
-            sim_number="123-4567890",
+            sim_number="123-4561890",
             date_of_issue="2001-01-01",
             date_end="2012-01-01"
         )

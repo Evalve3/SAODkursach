@@ -20,7 +20,7 @@ class ClientRepo(ClientRepoABC):
         self.client_tree.remove(client.passport_number)
 
     def find_by_passport(self, passport: str) -> Client:
-        return self.client_tree.find(passport).data
+        return self.client_tree.find(passport).data if self.client_tree.find(passport) is not None else None
 
     def get_all(self) -> list[Client]:
         return [node.data for node in self.client_tree.get_all()]
@@ -29,4 +29,4 @@ class ClientRepo(ClientRepoABC):
         search_func = self.search_in_text.search
         # print(self.client_tree.get_all())
         return [node.data for node in self.client_tree.get_all() if
-                search_func(node.data.passport_number, text) or search_func(node.data.address, text)]
+                search_func(node.data.full_name, text) or search_func(node.data.address, text)]

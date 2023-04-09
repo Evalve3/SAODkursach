@@ -47,7 +47,7 @@ class TestList(unittest.TestCase):
         self.lst.add_tail(0)
         self.lst.add_tail(4)
         self.lst.add_tail(435)
-        self.lst.cocktail_sort()
+        self.lst.sort()
         with unittest.mock.patch('sys.stdout', new=io.StringIO()) as fake_stdout:
             self.lst.print()
             self.assertEqual(fake_stdout.getvalue(), '0 1 2 3 4 56 435 ')
@@ -88,9 +88,9 @@ class TestList(unittest.TestCase):
         self.assertIsNone(self.lst.tail)
 
     def test_find_by_data(self):
-        sim1 = Sim(sim_number='123-1234567', tariff_plan='tariff1', year_of_issue=2020, active=True)
-        sim2 = Sim(sim_number='123-1234568', tariff_plan='tariff2', year_of_issue=2021, active=True)
-        sim3 = Sim(sim_number='123-1234569', tariff_plan='tariff3', year_of_issue=2022, active=True)
+        sim1 = Sim(sim_number='123-1234567', tariff_plan='tariff1', year_of_issue=2020, has=True)
+        sim2 = Sim(sim_number='123-1234568', tariff_plan='tariff2', year_of_issue=2021, has=True)
+        sim3 = Sim(sim_number='123-1234569', tariff_plan='tariff3', year_of_issue=2022, has=True)
         self.lst.add_tail(sim1)
         self.lst.add_tail(sim2)
         self.lst.add_tail(sim3)

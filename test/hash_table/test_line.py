@@ -35,8 +35,8 @@ class TestTable(unittest.TestCase):
     def test_add_duplicate(self):
         self.table.insert("A911KI", "A911KI")
         self.assertFalse(self.table.find("A911KI") == -1)
-        self.table.insert("A911KI", "A911KI")
-        self.assertFalse(self.table.find("A911KI") == -1)
+        with self.assertRaises(Exception):
+            self.table.insert("A911KI", "A911KI")
         self.table.print()
 
     def test_add_after_delete(self):
